@@ -1,22 +1,31 @@
-﻿@ignore
-Feature: AutenticaciÃ³n â€“ obtener token reutilizable
+@ignore
+Feature: Autenticacion - registrar usuario y obtener token JWT
 
-  # Este feature estÃ¡ pensado para ser llamado con karate.callSingle() desde karate-config.js.
-  # Al marcarlo con @ignore no se ejecuta como test independiente.
-  #
-  # Uso en karate-config.js:
-  #   var auth = karate.callSingle('classpath:features/common/auth.feature', config);
-  #   config.authToken = auth.token;
+  # Helper reutilizable. Se invoca con karate.call() pasando las variables necesarias.
 
-  Scenario: Login y obtener access token
-    Given url baseUrl + '/auth/login'
+  Scenario: Registrar usuario y obtener JWT cookie
+    # Registrar
+    Given url baseUrl
+    And path authRegisterPath
     And request
       """
       {
-        "username": "test-user",
-        "password": "test-password"
+        "name":         "#(name)",
+        "email":        "#(email)",
+        "password":     "#(password)",
+        "phone":        "#(phone)",
+        "documentType": "#(documentType)",
+        "documentId":   "#(documentId)",
+        "role":         "#(role)"
       }
       """
     When method POST
+    Then status 201
+
+    # Login para obtener cookie JWT
+    Given url baseUrl
+    And path authLoginPath
+    And request { "email": "#(email)", "password": "#(password)" }
+    When method POST
     Then status 200
-    * def token = response.access_token
+    * def jwtCookie = responseCookies.jwt.value

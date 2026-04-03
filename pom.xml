@@ -49,9 +49,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <!-- El runner paralelo ya gestiona la ejecuciÃ³n; Surefire solo lanza TestRunner -->
                     <includes>
-                        <include>**/TestRunner.java</include>
+                        <include>**/ParallelRunner.java</include>
                     </includes>
                 </configuration>
             </plugin>

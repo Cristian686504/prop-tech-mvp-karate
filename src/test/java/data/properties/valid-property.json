@@ -1,0 +1,7 @@
+{
+  "title":       "Apartamento Centro",
+  "description": "Apartamento de 2 habitaciones con vista al parque, cocina integral y zona de lavanderia.",
+  "address":     "Cra 7 #45-12, Bogota",
+  "price":       1500000,
+  "imageUrls":   ["https://example.com/img/prop1.jpg", "https://example.com/img/prop2.jpg"]
+}

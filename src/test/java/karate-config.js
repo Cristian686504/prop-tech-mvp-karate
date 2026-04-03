@@ -1,21 +1,14 @@
 ﻿// =============================================================================
-//  karate-config.js  â€“  ConfiguraciÃ³n global del proyecto Karate
-//  Este archivo se carga automÃ¡ticamente al iniciar cada test.
-//  Todas las variables que retorne el JSON estarÃ¡n disponibles en los .feature.
+//  karate-config.js — Configuracion global del proyecto Karate
 // =============================================================================
 function fn() {
 
-  // Leer el ambiente desde la variable de sistema (default: 'dev')
-  // Desde Maven: mvn test -Dkarate.env=staging
   var env = karate.env || 'dev';
   karate.log('Ambiente activo:', env);
 
-  // ---------------------------------------------------------------------------
-  // ConfiguraciÃ³n base por ambiente
-  // ---------------------------------------------------------------------------
   var config = {
     env:     env,
-    baseUrl: 'https://api.example.com'
+    baseUrl: 'http://172.27.31.64:8080'
   };
 
   if (env === 'staging') {
@@ -27,20 +20,17 @@ function fn() {
   }
 
   // ---------------------------------------------------------------------------
-  // AutenticaciÃ³n global (descomentar si se necesita)
-  // Llama a common/auth.feature una sola vez por suite y reutiliza el token.
+  // Paths de la API (centralizados para no hardcodear en los .feature)
   // ---------------------------------------------------------------------------
-  // var auth = karate.callSingle('classpath:features/common/auth.feature', config);
-  // config.authToken = auth.token;
+  config.authRegisterPath  = '/api/auth/register';
+  config.authLoginPath     = '/api/auth/login';
+  config.propertiesPath    = '/api/properties';
 
   // ---------------------------------------------------------------------------
-  // ConfiguraciÃ³n de HTTP
+  // Configuracion de HTTP
   // ---------------------------------------------------------------------------
   karate.configure('connectTimeout', 10000);
   karate.configure('readTimeout',    30000);
-
-  // Cabeceras globales (se aplican a todos los requests salvo que se sobreescriban)
-  // karate.configure('headers', { 'x-api-key': 'TU_API_KEY' });
 
   return config;
 }
