@@ -25,10 +25,10 @@ Feature: HU004 - Publicar Propiedad - Valores limite del titulo (max 255)
     And match response.title == tituloGenerado
 
     Examples:
-      | tcId   | longitud | nota                         |
-      | TC-035 | 1        | limite inferior (1 char)     |
-      | TC-036 | 254      | cercano al limite (254)      |
-      | TC-037 | 255      | limite exacto (255)          |
+      | tcId   | longitud |
+      | TC-035 | 1        |
+      | TC-036 | 254      |
+      | TC-037 | 255      |
 
   # ===========================================================================
   #  TC-038 - Titulo excede el limite (256 chars)

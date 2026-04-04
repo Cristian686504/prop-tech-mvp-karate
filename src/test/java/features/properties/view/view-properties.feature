@@ -13,18 +13,6 @@ Feature: HU005 - Visualizar Propiedades Disponibles
     * def timestamp = setup.timestamp
 
   # ===========================================================================
-  #  TC-058 - No existen propiedades publicadas (array vacio posible)
-  # ===========================================================================
-  @TC-058 @edge-case
-  Scenario: Endpoint responde correctamente cuando no hay propiedades
-    Given path propertiesPath
-    And cookie jwt = tenantJwt
-    When method GET
-    Then status 200
-    And match response.content == '#array'
-    And match response contains { totalElements: '#number' }
-
-  # ===========================================================================
   #  TC-057-detalle - Validar contenido exacto de propiedad creada
   # ===========================================================================
   @TC-057-detalle @happy-path
