@@ -16,18 +16,11 @@ Feature: HU004 - Publicar Propiedad - Validacion del precio
   # ===========================================================================
   @TC-047 @boundary
   Scenario: Publicacion fallida con precio no numerico (TC-047)
+    * copy prop = validProperty
+    * set prop.price = 'abc'
     Given path propertiesPath
     And cookie jwt = landlordJwt
-    And request
-      """
-      {
-        "title":       "#(validProperty.title)",
-        "description": "#(validProperty.description)",
-        "address":     "#(validProperty.address)",
-        "price":       abc,
-        "imageUrls":   #(validProperty.imageUrls)
-      }
-      """
+    And request prop
     When method POST
     Then status 400
 
