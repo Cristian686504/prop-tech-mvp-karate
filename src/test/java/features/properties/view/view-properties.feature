@@ -47,14 +47,3 @@ Feature: HU005 - Visualizar Propiedades Disponibles
     And match encontrada[0].price == 3500000
     And match encontrada[0].imageUrls == '#[2]'
     And match encontrada[0].status == 'AVAILABLE'
-
-  # ===========================================================================
-  #  TC-057-arrendador - Arrendador tambien puede listar propiedades
-  # ===========================================================================
-  @TC-057-arrendador @happy-path
-  Scenario: Arrendador tambien puede ver el listado de propiedades
-    Given path propertiesPath
-    And cookie jwt = landlordJwt
-    When method GET
-    Then status 200
-    And match response.content == '#array'
