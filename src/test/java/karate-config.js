@@ -8,7 +8,7 @@ function fn() {
 
   var config = {
     env:     env,
-    baseUrl: 'http://172.27.31.64:8080'
+    baseUrl: 'http://localhost:8080'
   };
 
   if (env === 'staging') {
